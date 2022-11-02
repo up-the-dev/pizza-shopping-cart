@@ -4,18 +4,30 @@ import Navigation from "./components/Navigation"
 import ProductsPage from "./pages/ProductsPage"
 import Cart from "./pages/Cart"
 import ProductDetail from "./pages/ProductDetail"
+import { useEffect, useState } from "react"
+import { CartContext } from "./CartContext"
 const App = () => {
+    const [cart, setCart] = useState({})
+    useEffect(() => {
+        const cart = window.localStorage.getItem('cart')
+        setCart(JSON.parse(cart))
+    }, [])
+    useEffect(() => {
+        window.localStorage.setItem('cart', JSON.stringify(cart))
+    }, [cart])
     return (
         <>
             <Router>
-                <Navigation />
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    {/* <Route path='/about' element={<About />} /> */}
-                    <Route path="/products" element={<ProductsPage />} />
-                    <Route path="/cart" element={<Cart />} />
-                    <Route path="/product/:id" element={< ProductDetail />} />
-                </Routes>
+                <CartContext.Provider value={{ cart, setCart }}>
+                    <Navigation />
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        {/* <Route path='/about' element={<About />} /> */}
+                        <Route path="/products" element={<ProductsPage />} />
+                        <Route path="/cart" element={<Cart />} />
+                        <Route path="/product/:id" element={< ProductDetail />} />
+                    </Routes>
+                </CartContext.Provider>
             </Router>
         </>
     )

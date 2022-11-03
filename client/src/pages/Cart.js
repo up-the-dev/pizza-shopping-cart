@@ -7,7 +7,7 @@ const Cart = () => {
                 <li className="mt-8">
                     <div className="flex items-center justify-between">
                         <div className="flex gap-3 items-center">
-                            <img src="/images/peproni.png" className="w-16" />
+                            <img src="/images/peproni.png" className="w-16" alt="product" />
                             <h1 className="font-medium">Double peproni</h1>
                         </div>
                         <div>
@@ -22,7 +22,7 @@ const Cart = () => {
                 <li className="mt-8">
                     <div className="flex items-center justify-between">
                         <div className="flex gap-3 items-center">
-                            <img src="/images/peproni.png" className="w-16" />
+                            <img src="/images/peproni.png" className="w-16" alt="product" />
                             <h1 className="font-medium">Double peproni</h1>
                         </div>
                         <div>
@@ -40,7 +40,7 @@ const Cart = () => {
                 <b>Grand Total:</b> ₹ 1000
             </div>
             <div className="text-right">
-                <button className="bg-orange-400 px-4 mt-4 rounded-full py-1">Order Now</button>
+                <button className="bg-orange-500 px-4 mt-4 rounded-full py-1">Order Now</button>
             </div>
         </div>
     )

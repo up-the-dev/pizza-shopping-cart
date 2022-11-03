@@ -12,9 +12,9 @@ const Products = () => {
 
     return (
         <>
-            <div className="container mx-auto">
-                <h1 className="pb-10 underline decoration-2 font-semibold text-lg">Products</h1>
-                <div className="container grid grid-cols-4 gap-24">
+            <div className="container mx-auto pb-24 ">
+                <h1 className="underline decoration-2 font-semibold text-lg my-8">Products</h1>
+                <div className="grid grid-cols-5 my-8 gap-24">
                     {products.map(product => <Product key={product._id} product={product} />)}
                 </div>
             </div>

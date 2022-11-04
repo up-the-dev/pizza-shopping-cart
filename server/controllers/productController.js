@@ -137,6 +137,19 @@ const productController = {
         } catch (err) {
             return next(err)
         }
+    },
+
+    async cartItemscontroller(req, res, next) {
+        const { ids } = req.body
+        let products
+        try {
+            products = await Product.find({ _id: ids })
+        } catch (error) {
+            return next(error)
+        }
+
+        res.send({ products })
+
     }
 }
 export default productController

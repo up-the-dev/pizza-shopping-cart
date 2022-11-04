@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react"
+import { useEffect, useContext, useState } from "react"
 import { useParams, useNavigate } from "react-router-dom"
-
+import { CartContext } from "../CartContext"
 
 const ProductDetail = () => {
     let [product, setproduct] = useState({})
@@ -13,6 +13,35 @@ const ProductDetail = () => {
                 setproduct(product)
             })
     }, [params.id])
+    let [isAdding, setIsAdding] = useState(false)
+    let { cart, setCart } = useContext(CartContext)
+    const addToCart = (e, product) => {
+        e.preventDefault()
+        console.log(product)
+        const _cart = { ...cart } //this prevents pass by reference
+        //checking if cart.item exits
+        if (!_cart.item) {
+            _cart.item = {}
+        }
+        //checking if product already in cart
+        if (!(_cart.item[product._id])) {
+            _cart.item[product._id] = 1
+        } else {
+            _cart.item[product._id] = _cart.item[product._id] + 1
+        }
+        if (!_cart.totalItems) {
+            _cart.totalItems = 1
+        } else {
+            _cart.totalItems = _cart.totalItems + 1
+        }
+        setCart(_cart)
+        setIsAdding(true)
+        setTimeout(() => {
+            setIsAdding(false)
+        }, 300)
+
+    }
+
     return (
         <div className="container mx-auto mt-10">
             <button className="font-medium" onClick={() => {
@@ -24,8 +53,10 @@ const ProductDetail = () => {
                     <h1 className="text-xl font-medium">{product.name}</h1>
                     <span>{product.size}</span>
                     <h2 className="font-medium">₹ {product.price}</h2>
-                    <button className="bg-orange-500 mt-2 rounded-lg">Add to cart</button>
 
+                    <button disabled={isAdding} className={` ${isAdding ? 'bg-green-500' : 'bg-orange-500'} px-3 rounded-full mt-2`} onClick={(e) => {
+                        addToCart(e, product)
+                    }}>{isAdding ? 'ADDED' : 'ADD TO CART'}</button>
                 </div>
             </div>
 

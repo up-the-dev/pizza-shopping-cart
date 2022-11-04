@@ -23,4 +23,6 @@ router.get('/products', productController.getAll)
 
 router.get('/product/:id', productController.getOne)
 
+router.post('/products/cart-items', productController.cartItemscontroller)
+
 module.exports = router;

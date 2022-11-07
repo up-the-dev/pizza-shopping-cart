@@ -7,11 +7,9 @@ import ProductDetail from "./pages/ProductDetail"
 import { useEffect, useState } from "react"
 import { CartContext } from "./CartContext"
 const App = () => {
-    const [cart, setCart] = useState({})
-    useEffect(() => {
-        const cart = window.localStorage.getItem('cart')
-        setCart(JSON.parse(cart))
-    }, [])
+    const [cart, setCart] = useState(() => {
+        return JSON.parse(localStorage.getItem('cart')) || {}
+    })
     useEffect(() => {
         window.localStorage.setItem('cart', JSON.stringify(cart))
     }, [cart])
